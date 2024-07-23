@@ -24,14 +24,8 @@ public class Role implements GrantedAuthority {
 
     private String authority;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "roles")
     private List<User> users;
-    public void addUser(User user){
-        if(users == null){
-            users = new ArrayList<>();
-        }
-        users.add(user);
-    }
 
     @Override
     public String getAuthority() {

@@ -9,4 +9,5 @@ public class CategoryMapper {
         res.setName(c.getName());
         return res;
     }
+
 }

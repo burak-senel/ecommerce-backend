@@ -22,6 +22,6 @@ public class ProductResponseDto {
 
     private Long category_id;
 
-    private List<ProductImagesRequestDto> images;
+    private List<ProductImagesResponseDto> images;
 
 }

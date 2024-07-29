@@ -33,7 +33,7 @@ public class UserMapper {
     }
 
 
-    public UserResponseDto toDto(User user) {
+    public UserResponseDto userToUserResponseDto(User user) {
         if (user == null) {
             return null;
         }

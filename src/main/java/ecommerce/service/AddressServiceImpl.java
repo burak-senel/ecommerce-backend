@@ -1,7 +1,7 @@
 package ecommerce.service;
 
 import ecommerce.entity.Address;
-import ecommerce.exceptions.Exception;
+import ecommerce.exceptions.CommerceException;
 import ecommerce.repository.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +21,7 @@ public class AddressServiceImpl implements AddressService{
 
     @Override
     public Address findAddressByID(Long id) {
-        return addressRepository.findAddressByID(id).orElseThrow(() -> new Exception("hata", HttpStatus.BAD_REQUEST));
+        return addressRepository.findAddressByID(id).orElseThrow(() -> new CommerceException("hata", HttpStatus.BAD_REQUEST));
     }
 
     @Override

@@ -6,10 +6,10 @@ import org.springframework.http.HttpStatus;
 
 @AllArgsConstructor
 @Getter
-public class Exception extends RuntimeException{
+public class CommerceException extends RuntimeException{
     private HttpStatus httpStatus;
 
-    public Exception(String message, HttpStatus httpStatus) {
+    public CommerceException(String message, HttpStatus httpStatus) {
         super(message);
         this.httpStatus = httpStatus;
     }

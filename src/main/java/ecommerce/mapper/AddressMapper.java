@@ -39,7 +39,7 @@ public class AddressMapper {
         res.setDistrict(a.getDistrict());
         List<UserResponseDto> userResponseDto = a.getUsers()
                 .stream()
-                .map(userMapper::toDto)
+                .map(userMapper::userToUserResponseDto)
                 .collect(Collectors.toList());
         res.setUsers(userResponseDto);
         return res;

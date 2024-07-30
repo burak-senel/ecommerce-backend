@@ -1,11 +1,13 @@
 package ecommerce.service;
 
+import ecommerce.dto.AddressRequestDto;
+import ecommerce.dto.AddressResponseDto;
 import ecommerce.entity.Address;
 
 import java.util.List;
 
 public interface AddressService {
-    Address findAddressByID(Long id);
-    List<Address> getAllAddress();
-    String saveAddress(Address address);
+    AddressResponseDto findAddressByID(Long id);
+    List<AddressResponseDto> getAllAddress();
+    AddressResponseDto saveAddress(AddressRequestDto addressRequestDto);
 }

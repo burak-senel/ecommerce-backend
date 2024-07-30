@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.Mapping;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -25,7 +26,7 @@ public class Role implements GrantedAuthority {
     private String authority;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "roles")
-    private List<User> users;
+    private Set<User> users;
 
     @Override
     public String getAuthority() {

@@ -20,6 +20,10 @@ public class CategoryServiceImpl implements CategoryService{
     public CategoryServiceImpl(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
+    @Override
+    public boolean isCategoryExist(Long categoryId) {
+        return categoryRepository.findById(categoryId).isPresent();
+    }
 
     @Override
     public List<Category> getAllCategories() {

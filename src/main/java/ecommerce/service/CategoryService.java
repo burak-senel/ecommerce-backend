@@ -10,4 +10,6 @@ public interface CategoryService {
     List<Category> getAllCategories();
     Category getCategoryByID(long id);
     Category save(CategoryRequestDto categoryRequestDto);
+
+    boolean isCategoryExist(Long categoryId);
 }

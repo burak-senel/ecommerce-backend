@@ -1,5 +1,6 @@
 package ecommerce.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,5 +20,6 @@ public class ProductImages {
 
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH})
     @JoinColumn(name="product_id")
+    @JsonIgnore
     private Product product;
 }

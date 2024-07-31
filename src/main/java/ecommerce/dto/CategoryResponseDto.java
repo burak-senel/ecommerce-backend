@@ -13,4 +13,5 @@ public class CategoryResponseDto {
     private String name;
 
     private String gender;
+    private String image_url;
 }

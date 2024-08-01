@@ -12,6 +12,9 @@ public class UserRequestDto {
     @NotEmpty(message="name cannot empty or null")
     @Size(min=3, message = "name size have to min 3 char.")
     private String name;
+    @NotEmpty(message="surname cannot empty or null")
+    @Size(min=3, message = "surname size have to min 3 char.")
+    private String surname;
     @NotEmpty(message="email cannot empty or null")
     @Email(message="Wrong e-mail format")
     private String email;

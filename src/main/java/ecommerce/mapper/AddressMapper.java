@@ -4,6 +4,8 @@ import ecommerce.dto.AddressRequestDto;
 import ecommerce.dto.AddressResponseDto;
 import ecommerce.dto.UserResponseDto;
 import ecommerce.entity.Address;
+import ecommerce.entity.User;
+import ecommerce.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -13,10 +15,12 @@ import java.util.stream.Collectors;
 public class AddressMapper {
 
     private static UserMapper userMapper;
+    private static UserService userService;
 
     @Autowired
-    public AddressMapper(UserMapper userMapper) {
+    public AddressMapper(UserMapper userMapper,UserService userService) {
         AddressMapper.userMapper = userMapper;
+        AddressMapper.userService =userService;
     }
 
     public static Address addressRequestToAddress(AddressRequestDto a)
@@ -27,6 +31,7 @@ public class AddressMapper {
         res.setTitle(a.getTitle());
         res.setZipcode(a.getZipcode());
         res.setDistrict(a.getDistrict());
+
         return res;
     }
     public static AddressResponseDto addressToAddressResponseDto(Address a){
@@ -37,11 +42,6 @@ public class AddressMapper {
         res.setTitle(a.getTitle());
         res.setZipcode(a.getZipcode());
         res.setDistrict(a.getDistrict());
-        List<UserResponseDto> userResponseDto = a.getUsers()
-                .stream()
-                .map(userMapper::userToUserResponseDto)
-                .collect(Collectors.toList());
-        res.setUsers(userResponseDto);
         return res;
     }
     public static List<AddressResponseDto> addressListToAddressResponseList(List<Address> all) {

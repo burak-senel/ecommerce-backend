@@ -16,6 +16,4 @@ public class AddressResponseDto {
     private String district;
     private String address;
     private String zipcode;
-    private List<UserResponseDto> users;
-
 }

@@ -1,7 +1,10 @@
 package ecommerce.service;
 
+import ecommerce.dto.ProductImagesRequestDto;
 import ecommerce.dto.ProductRequestDto;
+import ecommerce.entity.Category;
 import ecommerce.entity.Product;
+import ecommerce.entity.ProductImages;
 import ecommerce.exceptions.CommerceException;
 import ecommerce.mapper.ProductMapper;
 import ecommerce.repository.ProductRepository;
@@ -57,5 +60,44 @@ List<Product> savedProducts=new ArrayList<>();
         }
         return productRepository.getProductsByCategoryId(categoryId);
     }
+    @Override
+    public Product updateProductImages(Long productId, List<ProductImagesRequestDto> images) {
+        Product product = findById(productId); // Ensure the product exists
+        List<ProductImages> productImages = new ArrayList<>();
+        for (ProductImagesRequestDto imageDto : images) {
+            ProductImages newImage = new ProductImages();
+            newImage.setUrl(imageDto.getUrl());
+            newImage.setProduct(product);
+            productImages.add(newImage);
+        }
+        product.setProductImages(productImages);
+        return productRepository.save(product);
+    }
+    @Override
+    public Product updateProduct(Long productId, ProductRequestDto productRequestDto) {
 
+        Product existingProduct = findById(productId);
+
+        existingProduct.setName(productRequestDto.getName());
+        existingProduct.setDescription(productRequestDto.getDescription());
+        existingProduct.setPrice(productRequestDto.getPrice());
+        existingProduct.setStock(productRequestDto.getStock());
+
+        Category category = categoryService.getCategoryByID(productRequestDto.getCategory_id());
+        existingProduct.setCategory(category);
+
+        // Update product images if provided
+        if (productRequestDto.getImages() != null) {
+            List<ProductImages> productImages = new ArrayList<>();
+            for (ProductImagesRequestDto imageDto : productRequestDto.getImages()) {
+                ProductImages newImage = new ProductImages();
+                newImage.setUrl(imageDto.getUrl());
+                newImage.setProduct(existingProduct);
+                productImages.add(newImage);
+            }
+            existingProduct.setProductImages(productImages);
+        }
+
+        return productRepository.save(existingProduct);
+    }
 }

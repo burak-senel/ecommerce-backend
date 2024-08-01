@@ -20,11 +20,15 @@ import java.util.List;
 @Table(name="users",schema = "e_commerce")
 public class User implements UserDetails {
 
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
     private String name;
+    @NotNull
+    private String surname;
     @NotNull
     @Email
     private String email;
@@ -53,6 +57,25 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return name;
+        return email;
+    }
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

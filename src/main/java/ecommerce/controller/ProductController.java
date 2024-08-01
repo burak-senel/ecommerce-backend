@@ -1,5 +1,6 @@
 package ecommerce.controller;
 
+import ecommerce.dto.ProductImagesRequestDto;
 import ecommerce.dto.ProductRequestDto;
 import ecommerce.entity.Product;
 import ecommerce.service.ProductService;
@@ -39,5 +40,15 @@ public class ProductController {
     public ResponseEntity<List<Product>> saveProducts(@Valid @RequestBody List<ProductRequestDto> productRequestDtos) {
         List<Product> savedProducts = productService.save(productRequestDtos);
         return new ResponseEntity<>(savedProducts, HttpStatus.CREATED);
+    }
+    @PutMapping("/{id}/images")
+    public ResponseEntity<Product> updateProductImages(@PathVariable Long id, @Valid @RequestBody List<ProductImagesRequestDto> images) {
+        Product updatedProduct = productService.updateProductImages(id, images);
+        return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @Valid @RequestBody ProductRequestDto productRequestDto) {
+        Product updatedProduct = productService.updateProduct(id, productRequestDto);
+        return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
     }
 }

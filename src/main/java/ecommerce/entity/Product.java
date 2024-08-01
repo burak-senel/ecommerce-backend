@@ -31,7 +31,6 @@
         private Category category;
 
         @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
-
         private List<ProductImages> productImages;
 
     }

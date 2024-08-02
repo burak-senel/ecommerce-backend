@@ -24,13 +24,13 @@ public class SecurityConfig {
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
-//    @Bean
-//    public AuthenticationManager authManager(UserDet  ailsService userDetailsService) {
-//        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-//        provider.setUserDetailsService(userDetailsService);
-//        provider.setPasswordEncoder(passwordEncoder());
-//        return new ProviderManager(provider);
-//    }
+    @Bean
+    public AuthenticationManager authManager(UserDetailsService userDetailsService) {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(userDetailsService);
+        provider.setPasswordEncoder(passwordEncoder());
+        return new ProviderManager(provider);
+    }
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
@@ -47,17 +47,14 @@ public class SecurityConfig {
         security.cors().configurationSource(corsConfigurationSource());
         return security.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> {
-                    auth.requestMatchers("/auth/**").permitAll();
 
                     auth.requestMatchers("/user/**").permitAll();
 
                     auth.requestMatchers("/roles**").permitAll();
 
-                    auth.requestMatchers("/card/**").permitAll();
+                    auth.requestMatchers("/product-images/**").permitAll();
 
-                    auth.requestMatchers("/order/**").permitAll();
-
-                    auth.requestMatchers("/address/**").permitAll();
+                    auth.requestMatchers("/addresses/**").permitAll();
 
                     auth.requestMatchers("/category/**").permitAll();
 

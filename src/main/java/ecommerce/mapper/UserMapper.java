@@ -6,7 +6,9 @@ import ecommerce.entity.Role;
 import ecommerce.entity.User;
 import ecommerce.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UserMapper {
 
     private final RoleRepository roleRepository;
@@ -15,20 +17,16 @@ public class UserMapper {
         this.roleRepository = roleRepository;
     }
 
-    public User toEntity(UserRequestDto userRequestDto) {
+    public User userRequestDtoToUser(UserRequestDto userRequestDto) {
         if (userRequestDto == null) {
             return null;
         }
 
         User user = new User();
         user.setName(userRequestDto.getName());
+        user.setSurname(userRequestDto.getSurname());
         user.setEmail(userRequestDto.getEmail());
         user.setPassword(userRequestDto.getPassword());
-
-        Role role = roleRepository.findById(userRequestDto.getRole_id())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid role ID: " + userRequestDto.getRole_id()));
-        user.setRole(role);
-
         return user;
     }
 
@@ -39,7 +37,7 @@ public class UserMapper {
         }
 
         UserResponseDto userResponseDto = new UserResponseDto();
-        userResponseDto.setId(user.getId());
+        userResponseDto.setLastname(user.getSurname());
         userResponseDto.setName(user.getName());
         userResponseDto.setEmail(user.getEmail());
 
